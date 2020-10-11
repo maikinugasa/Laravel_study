@@ -46,9 +46,9 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'unix_socket' => env('DB_SOCKET', '/var/lib/mysql/mysql.sock'), //編集
+            'charset' => 'utf8', //utf8mb4から変更
+            'collation' => 'utf8_unicode_ci',//utf8mb4_unicode_ciから変更
             'prefix' => '',
             'strict' => true,
             'engine' => null,

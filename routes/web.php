@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//課題30にて追記
+Route::get('/', 'ItemController@index');
+//商品詳細画面へ
+Route::get('item/detail/{id}', 'ItemController@detail');

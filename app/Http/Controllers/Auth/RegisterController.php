@@ -27,7 +27,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    protected $redirectTo = '/'; //登録後に商品一覧ページ(TOPページ)に飛ぶよう変更
 
     /**
      * Create a new controller instance.

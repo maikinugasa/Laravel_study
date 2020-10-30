@@ -25,7 +25,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    protected $redirectTo = '/'; //ログイン後にhomeではなく商品一覧ページ(TOPページ)に飛ぶよう変更
 
     /**
      * Create a new controller instance.

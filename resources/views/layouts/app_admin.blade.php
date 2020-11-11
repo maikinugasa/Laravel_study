@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<style>body{background-color:#D2B48C;}</style>
 </head>
 <body>
     <div id="app">
@@ -28,7 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">Shop</a>
+                    <a class="navbar-brand" href="{{ url('/admin/home') }}">Shop</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -40,10 +41,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @guest
+                        @if (empty(Auth::user()) || !Auth::guard('admin')->check())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
                             <li><a href="{{ route('admin.login') }}">Login for admin</a></li>
+                            <li><a href="{{ url('/') }}">ユーザーページ</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -52,19 +53,20 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="{{ route('admin.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
+                            <li><a href="{{ url('/') }}">ユーザーページ</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

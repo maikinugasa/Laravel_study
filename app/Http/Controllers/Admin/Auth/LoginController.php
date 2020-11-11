@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth; //修正
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -27,8 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = '/home';
-    protected $redirectTo = '/'; //ログイン後にhomeではなく商品一覧ページ(TOPページ)に飛ぶよう変更
+    protected $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
@@ -37,18 +36,25 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+		//ログアウトはログイン後に実行出来るようexceptに設定する
+        $this->middleware('guest:admin')->except('logout'); //変更
     }
-
+	//下記追加(課題33)
+	//ログイン画面をviewに表示
+	public function showLoginForm(Request $request)
+	{
+		return view('admin.login');
+	}
 	protected function guard()
 	{
-		return Auth::guard('user');
+		return Auth::guard('admin');
 	}
 	public function logout(Request $request)
 	{
-		Auth::guard('user')->logout();
-		//ユーザーと管理者両方でログインしていた場合、userだけをログアウト(セッション削除)するよう設定
-		$request->session()->forget('user');
-		return redirect('/'); //ログアウト後のリダイレクト先
+		Auth::guard('admin')->logout();
+		//ユーザーと管理者両方でログインしていた場合、adminだけをログアウト(セッション削除)するよう設定
+		$request->session()->forget('admin');
+		return redirect('/admin/login'); //ログアウト後のリダイレクト先
 	}
+
 }

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user', //web→userに変更
         'passwords' => 'users',
     ],
 
@@ -34,7 +34,7 @@ return [
     | Supported: "session", "token"
     |
     */
-
+	//guardsではどんなログイン方法にするか(セッションにするかトークンにするかなど)、どのデータベースの情報を見にいくかを設定する
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -44,7 +44,17 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+			//'hash' => false,
         ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+		//下記追加(課題33)
+		'admin' => [
+			'driver' => 'session',
+			'provider' => 'admins',
+		],
     ],
 
     /*
@@ -68,6 +78,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
         ],
 
         // 'users' => [
@@ -94,6 +108,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
         ],

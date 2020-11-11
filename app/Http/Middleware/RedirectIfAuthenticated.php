@@ -16,11 +16,17 @@ class RedirectIfAuthenticated
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
-        }
-
-        return $next($request);
-    }
+	{
+		//ログインや登録画面へアクセス時、既にログイン済みの場合のリダイレクトする先を設定
+		if (Auth::guard($guard)->check()) {
+			//下記4行追加
+			//adminでのログイン時はadmin/homeへ
+			if ($guard === 'admin') {
+				return redirect('admin/home');
+			} else {
+				return redirect('/home');
+			}
+		}
+		return $next($request);
+	}
 }

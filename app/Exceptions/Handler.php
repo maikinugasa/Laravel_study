@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException; //追加(課題33)
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -50,4 +51,16 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+	//下記より追加(課題33)
+	public function unauthenticated($request, AuthenticationException $exception)
+	{
+		//ミドルウェアが未認証ユーザーを突き止めると、401 JSONレスポンスか、もしくはリクエストがAJAXでなければ、ユーザーをlogin名前付きルートへリダイレクト
+		if($request->expectsJson()){
+			return response()->json(['message' => $exception->getMessage()], 401);
+		}
+		if (in_array('admin', $exception->guards(), true)) {
+			return redirect()->guest(route('admin.login'));
+		}
+		return redirect()->guest(route('login'));
+	}
 }

@@ -46,4 +46,11 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('logout','Admin\Auth\LoginController@logout')->name('admin.logout');
 	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
+	Route::get('index', 'Admin\ItemController@index')->name('admin.index'); //商品一覧ページ(管理者TOPページ)
+	Route::get('item/detail/{id}', 'Admin\ItemController@detail')->name('admin.detail'); //商品詳細ページ
+	Route::get('item/create', 'Admin\ItemController@create')->name('admin.create'); //商品追加ページ
+	Route::post('item/store', 'Admin\ItemController@store')->name('admin.store'); //商品追加処理
+	Route::get('item/edit/{id}', 'Admin\ItemController@edit')->name('admin.edit'); //商品編集ページ
+	Route::post('item/update/{id}', 'Admin\ItemController@update')->name('admin.update'); //商品編集の更新処理
+	Route::post('item/destroy/{id}', 'Admin\ItemController@destroy')->name('admin.destroy'); //商品削除処理
 });

@@ -12,7 +12,7 @@
 	<tr>
 		<th scope="col">商品名</th>
 		<th scope="col">値段</th>
-		<th scope="col">在庫数</th>
+		<th scope="col">在庫状況</th>
 	</tr>
 </thead>
 <tbody>
@@ -29,6 +29,7 @@
 	@endforeach
 </tbody>
 </table>
+ {{ $items->links() }}
 </div>
 </div>
 </div>

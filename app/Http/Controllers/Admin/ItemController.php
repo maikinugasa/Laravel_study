@@ -54,7 +54,7 @@ class ItemController extends Controller
 		$item->price = $request->input('price');
 		$item->stock = $request->input('stock');
 		$item->save();
-		return redirect('admin/index')->with([
+		return redirect()->route('admin.index')->with([
 			'flash_message' => '商品の登録が完了しました',
 			'color' => 'success'
 		]);
@@ -127,7 +127,7 @@ class ItemController extends Controller
 	{
 		$item = Item::find($id);
 		$item->delete();
-		return redirect('admin/index')->with([
+		return redirect()->route('admin.index')->with([
 			'flash_message' => '商品を削除しました',
 			'color' => 'success'
 		]);

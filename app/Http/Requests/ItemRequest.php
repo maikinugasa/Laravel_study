@@ -37,12 +37,14 @@ class ItemRequest extends FormRequest
 			'price' => [
 				'required', //入力必須
 				'integer', //整数がどうか
-				'digits_between:1,10', //10桁以内であるか
+				'min:0', //0以上
+				'max:10000000' //10000000以内
 			],
 			'stock' => [
 				'required', //入力必須
 				'integer', //整数かどうか
-				'digits_between:1,10', //10桁以内であるか
+				'min:0', //0以上
+				'max:10000000' //10000000以内
 			]
         ];
     }
@@ -57,11 +59,13 @@ class ItemRequest extends FormRequest
 			//金額
 			'price.required' => '金額：入力必須です',
 			'price.integer' => '金額：整数で指定してください',
-			'price.digits_between' => '金額：1-10桁で入力してください',
+			'price.min' => '金額：不正な数字です',
+			'price.max' => '金額：不正な数字です',
 			//在庫数
 			'stock.required' => '在庫数：入力必須です',
 			'stock.integer' => '在庫数：整数で指定してください',
-			'stock.digits_between' => '在庫数：1-10桁で入力してください',
+			'stock.min' => '金額：不正な数字です',
+			'stock.max' => '金額：不正な数字です',
 		];
 	}
 }

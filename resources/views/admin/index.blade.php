@@ -11,7 +11,7 @@
 		{{ session('flash_message') }}
 	</div>
 @endif
-<a href="{{ action('Admin\ItemController@create') }}">商品追加</a>
+<a href="{{ route('admin.create') }}">商品追加</a>
 </div>
 <div class="panel-body">
 <table class="table">
@@ -26,7 +26,7 @@
 @foreach($items as $item)
 	<tr>
 		<td>
-			<a href="{{ action('Admin\ItemController@detail', $item->id) }}">{{ $item->product_name }}</a>
+			<a href="{{ route('admin.detail', ['id' => $item->id]) }}">{{ $item->product_name }}</a>
 		</td>
 		<td>{{ $item->price }}yen</td>
 		@empty($item->stock)
@@ -35,10 +35,10 @@
 			<td>○在庫あり</td>
 		@endempty
 		<td>
-			<a href="{{ route('admin.edit', ['id'=>$item->id]) }}" class="btn btn-primary btn-sm">編集</a>
+			<a href="{{ route('admin.edit', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">編集</a>
 		</td>
 		<td>
-			<form action="{{ route('admin.destroy', ['id'=>$item->id]) }}" method="POST">
+			<form action="{{ route('admin.destroy', ['id' => $item->id]) }}" method="POST">
 				{{ csrf_field() }}
 				<input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
 			</form>

@@ -16,9 +16,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //課題30にて追記
-Route::get('/', 'ItemController@index');
+Route::get('/', 'ItemController@index')->name('index');
 //商品詳細画面へ
-Route::get('item/detail/{id}', 'ItemController@detail');
+Route::get('item/detail/{id}', 'ItemController@detail')->name('item.detail');
 
 
 /*------------------------------------
@@ -26,10 +26,13 @@ Route::get('item/detail/{id}', 'ItemController@detail');
 --------------------------------------*/
 Route::get('/', 'ItemController@index');
 /*------------------------------------
-	User 認証要のページ(ログアウト)
+	User 認証要のページ(ログアウト・カート機能)
 --------------------------------------*/
 Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('logout','Auth\LoginController@logout')->name('logout');
+	Route::get('cart/index', 'CartController@index')->name('cart.index');
+	Route::post('cart/add/{id}', 'CartController@add')->name('cart.add'); //カート追加処理
+	Route::post('cart/destroy/{id}', 'CartController@destroy')->name('cart.destroy'); //カート内商品削除処理
 });
 /*------------------------------------
 	Admin 認証不要のページ(ログイン)
@@ -40,7 +43,7 @@ Route::group(['prefix' => 'admin'], function() {
 });
 
 /*------------------------------------
-	Admin 認証要のページ(管理者用ホーム・ログアウト)
+	Admin 認証要のページ(管理者用ホーム・商品管理・ログアウト)
 --------------------------------------*/
 //config/auth.phpで指定したguardsで認証されたユーザーだけにアクセス許可
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {

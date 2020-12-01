@@ -5,6 +5,11 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
+@if (session('flash_message'))
+	<div class="alert alert-{{ session('color') }}">
+		{{ session('flash_message') }}
+	</div>
+@endif
 <div class="panel-heading">商品一覧</div>
 <div class="panel-body">
 <table class="table">

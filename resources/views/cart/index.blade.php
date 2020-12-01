@@ -1,4 +1,4 @@
-@extends('layouts.app_admin')
+@extends('layouts.app_cart')
 
 @section('content')
 <div class="container">
@@ -9,40 +9,37 @@
 		{{ session('flash_message') }}
 	</div>
 @endif
+@if($cart_count > 0)
+<h2>カート内容</h2>
 <div class="panel panel-default">
 <table class="table">
 <thead>
 	<tr>
 		<th scope="col">商品名</th>
-		<th scope="col">商品説明</th>
 		<th scope="col">値段</th>
-		<th scope="col" colspan="3">在庫数</th>
+		<th scope="col" colspan="2">購入数</th>
 	</tr>
 </thead>
 <tbody>
+	@foreach($carts as $cart)
 	<tr>
-		<td>{{$item->product_name}}</td>
-		<td>{{$item->description}}</td>
-		<td>{{$item->price}}</td>
-		@empty($item->stock)
-			<td>×在庫無し</td>
-		@else
-			<td>○在庫あり</td>
-		@endempty
+		<td>{{ $cart->item->product_name }}</td>
+		<td>{{ $cart->item->price }}</td>
+		<td>{{ $cart->quantity }}</td>
 		<td>
-			<a href="{{ route('admin.edit', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">編集</a>
-		</td>
-		<td>
-			<form action="{{ route('admin.destroy', ['id' => $item->id]) }}" method="POST">
+			<form action="{{ route('cart.destroy', ['id' => $cart->item->id]) }}" method="POST">
 				{{ csrf_field() }}
 				<input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
 			</form>
 		</td>
 	</tr>
+	@endforeach
 </tbody>
 </table>
 </div>
-<a href="{{ route('admin.index') }}">商品一覧へ戻る</a>
+@else
+<p style="text-align:center;">カートは空です</p>
+@endif
 </div>
 </div>
 </div>

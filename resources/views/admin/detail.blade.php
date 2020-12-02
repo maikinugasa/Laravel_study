@@ -23,7 +23,7 @@
 	<tr>
 		<td>{{$item->product_name}}</td>
 		<td>{{$item->description}}</td>
-		<td>{{$item->price}}</td>
+		<td>¥{{$item->price}}</td>
 		@empty($item->stock)
 			<td>×在庫無し</td>
 		@else

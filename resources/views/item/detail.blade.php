@@ -29,10 +29,10 @@
 		@else
 			<td>○在庫あり</td>
 		@endempty
-		@if (Auth::user())
-			@if(!empty($item->stock))
+		@if(!empty($item->stock))
+			@if (Auth::user())
 			<td>
-				<form action="{{ route('cart.add', ['id'=>$item->id]) }}" method="POST">
+				<form action="{{ route('cart.add', ['id' => $item->id]) }}" method="POST">
 					{{ csrf_field() }}
 					<select name="quantity">
 					<option value="1" selected>1</option>
@@ -44,7 +44,11 @@
 					<input type="submit" value="カートに追加する" class="btn btn-primary btn-sm btn-dell">
 				</form>
 			</td>
+			@else
+				<td>ログインしてください</td>
 			@endif
+		@else
+			<td>在庫無し</td>
 		@endif
 	</tr>
 </tbody>

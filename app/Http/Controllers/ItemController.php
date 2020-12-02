@@ -19,16 +19,4 @@ class ItemController extends Controller
 		$item = Item::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
 		return view('item.detail')->with('item', $item); //viewに渡す
 	}
-/*--------------------------------
-	管理者用アイテム一覧
----------------------------------
-	public function admin_item() {
-		$items = Item::all();
-		return view('admin.admin_item')->with('items', $items); //viewに渡す
-	}
-	public function admin_item_detail($id) {
-		$item = Item::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
-		return view('admin.admin_item_detail')->with('item', $item); //viewに渡す
-	}
- */
 }

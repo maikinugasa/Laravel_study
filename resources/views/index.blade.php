@@ -24,7 +24,7 @@
 	@foreach($items as $item)
 		<tr>
 			<td><a href="{{action('ItemController@detail', $item->id)}}">{{$item->product_name}}</a></td>
-			<td>{{$item->price}}yen</td>
+			<td>¥{{$item->price}}</td>
 			@empty($item->stock)
 				<td>×在庫無し</td>
 			@else

@@ -15,7 +15,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//課題30にて追記
 Route::get('/', 'ItemController@index')->name('index');
 //商品詳細画面へ
 Route::get('item/detail/{id}', 'ItemController@detail')->name('item.detail');
@@ -35,7 +34,7 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('cart/destroy/{id}', 'CartController@destroy')->name('cart.destroy'); //カート内商品削除処理
 });
 /*------------------------------------
-	Admin 認証不要のページ(ログイン)
+	Admin 認証不要のページ(管理者用ログイン)
 --------------------------------------*/
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('login','Admin\Auth\LoginController@showLoginForm')->name('admin.login');

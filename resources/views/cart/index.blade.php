@@ -17,7 +17,8 @@
 		<tr>
 			<th scope="col">商品名</th>
 			<th scope="col">値段</th>
-			<th scope="col" colspan="2">購入数</th>
+			<th scope="col">購入数</th>
+			<th scope="col" colspan="2">商品合計</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,6 +27,7 @@
 				<td>{{ $cart->item->product_name }}</td>
 				<td>¥{{ $cart->item->price }}</td>
 				<td>{{ $cart->quantity }}</td>
+				<td style="color:brown;">¥{{ $cart->item->price * $cart->quantity }}</td>
 				<td>
 					<form action="{{ route('cart.destroy', ['id' => $cart->item->id]) }}" method="POST">
 						{{ csrf_field() }}

@@ -5,9 +5,13 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
-@if (session('flash_message'))
-	<div class="alert alert-{{ session('color') }}">
-		{{ session('flash_message') }}
+@if ($errors->any())
+	<div class="alert alert-danger">
+	<ul>
+	@foreach ($errors->all() as $error)
+		<li>{{ $error }}</li>
+	@endforeach
+	</ul>
 	</div>
 @endif
 <table class="table">

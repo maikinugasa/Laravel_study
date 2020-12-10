@@ -25,13 +25,19 @@ Route::get('item/detail/{id}', 'ItemController@detail')->name('item.detail');
 --------------------------------------*/
 Route::get('/', 'ItemController@index');
 /*------------------------------------
-	User 認証要のページ(ログアウト・カート機能)
+	User 認証要のページ(ログアウト・カート機能・配送先住所)
 --------------------------------------*/
 Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('logout','Auth\LoginController@logout')->name('logout');
 	Route::get('cart/index', 'CartController@index')->name('cart.index');
 	Route::post('cart/add/{id}', 'CartController@add')->name('cart.add'); //カート追加処理
 	Route::post('cart/destroy/{id}', 'CartController@destroy')->name('cart.destroy'); //カート内商品削除処理
+	Route::get('account/index', 'Account\HomeController@index')->name('account.index'); //後々その他のアカウント設定ページを作った時用（現在は住所情報のみ)
+	Route::get('adress/index', 'Account\AdressController@index')->name('adress.index'); //登録住所一覧表示
+	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //登録住所削除処理
+	Route::get('adress/create', 'Account\AdressController@create')->name('adress.create'); //新規住所登録ページ
+	Route::post('adress/store', 'Account\AdressController@store')->name('adress.store'); //住所登録処理
+	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //商品削除処理
 });
 /*------------------------------------
 	Admin 認証不要のページ(管理者用ログイン)

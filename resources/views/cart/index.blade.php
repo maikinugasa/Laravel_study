@@ -31,7 +31,7 @@
 				<td>
 					<form action="{{ route('cart.destroy', ['id' => $cart->item->id]) }}" method="POST">
 						{{ csrf_field() }}
-						<input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
+						<input type="submit" value="削除">
 					</form>
 				</td>
 			</tr>
@@ -40,11 +40,16 @@
 	</table>
 	</div>
 	<div style="text-align:right;">
-	<p>小計：¥{{ $subtotal }}</p>
-	<p>外税10%：¥{{ $tax }}</p>
-	<p>------------------------------</p>
+	<p>
+	小計：¥{{ $subtotal }}<br>
+	外税10%：¥{{ $tax }}<br>
+	------------------------------
+	</p>
 	<p style="font-weight:bold; font-size:18px;">合計金額：¥{{ $total }}(税込)</p>
 	</div>
+	<p style="text-align:center;">
+	<a href="" class="btn btn-primary btn-sm" style="font-size:18px;">次へ進む（お届け先選択)</a>
+	</p>
 @else
 	<p style="text-align:center;">カートは空です</p>
 @endif

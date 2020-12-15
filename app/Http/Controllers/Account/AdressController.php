@@ -22,7 +22,13 @@ class AdressController extends Controller
 	//住所登録ページ
     public function create()
     {
-		return view('account.adress.create');
+		$url = url()->previous();
+		if ($url == 'https://procir-study.site/kinugasa351/exercise27/laravel_study/public/adress/choose') {
+			$page = 'from_cart';
+		} else {
+			$page = 'from_account';
+		}
+		return view('account.adress.create', compact('page'));
     }
 
 	//住所登録処理
@@ -37,16 +43,25 @@ class AdressController extends Controller
 		$adress->adress = $request->input('adress');
 		$adress->phonenumber = $request->input('phonenumber');
 		$adress->save();
-		return redirect()->route('adress.index')->with([
-			'flash_message' => '住所の登録が完了しました',
-			'color' => 'success'
+		//推移元によってリダイレクト先切り替え
+		$page = $request->input('page');
+		if ($page == 'from_cart') {
+			return redirect()->route('adress.choose');
+		} elseif ($page == 'from_account') {
+			return redirect()->route('adress.index')->with([
+				'flash_message' => '住所の登録が完了しました',
+				'color' => 'success'
 		]);
+		}
     }
 
-	//住所選択ページ？
-    public function show($id)
+	//住所選択ページ
+    public function choose()
     {
-        //
+		$user_id = Auth::id();
+		$adresses = Adress::where('user_id', $user_id)->get();
+		$adress_count = $adresses->count();
+		return view('account.adress.choose', compact('adresses' ,'adress_count'));
     }
 
 	//住所編集ページ

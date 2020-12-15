@@ -10,6 +10,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" method="POST" action="{{ route('adress.store') }}">
 						{{ csrf_field() }}
+								<input type="hidden" name="page"  value="{{ $page }}">
 							<!---氏名-->
 							<label for="product_name" class="col-md-4 control-label">氏名</label>
 							<div class="col-md-6" style="margin-bottom:5px">

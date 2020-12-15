@@ -8,6 +8,7 @@ use Illuminate\Support\facades\Auth;
 use App\Http\Requests\CartRequest; //バリデーション
 use App\Cart;
 use App\Item;
+use App\Adress;
 
 class CartController extends Controller
 {
@@ -104,4 +105,15 @@ class CartController extends Controller
 			'color' => 'danger'
 		]);
 	}
+	//内容確認ページ
+    public function confirm(Request $request)
+    {
+		//$user_id = Auth::id();
+		//$adresses = Adress::where('user_id', $user_id)->get();
+		//$adress_count = $adresses->count();
+		//return view('cart.confirm', compact('adresses' ,'adress_count'));
+		$value = $request->input('adress');
+		dd($value);
+		return view('cart.confirm', compact('value'));
+    }
 }

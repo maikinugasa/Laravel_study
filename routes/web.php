@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('adress/create', 'Account\AdressController@create')->name('adress.create'); //新規住所登録ページ
 	Route::post('adress/store', 'Account\AdressController@store')->name('adress.store'); //住所登録処理
 	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //商品削除処理
+	Route::get('adress/choose', 'Account\AdressController@choose')->name('adress.choose'); //住所選択ページ
+	Route::post('cart/confirm', 'CartController@confirm')->name('cart.confirm'); //内容確認ページ
 });
 /*------------------------------------
 	Admin 認証不要のページ(管理者用ログイン)

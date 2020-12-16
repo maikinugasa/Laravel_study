@@ -34,9 +34,12 @@
 				<td>{{ $adress->prefecture }}{{ $adress->city }}{{ $adress->adress }}</td>
 				<td>{{ $adress->phonenumber }}</td>
 				<td>
+					<a href="{{ route('adress.edit', ['id' => $adress->id]) }}" class="btn btn-primary btn-sm">編集</a>
+				</td>
+				<td>
 					<form action="{{ route('adress.destroy', ['id' => $adress->id]) }}" method="POST">
 						{{ csrf_field() }}
-						<input type="submit" value="削除">
+						<input type="submit" class="btn btn-danger btn-sm btn-dell" value="削除">
 					</form>
 				</td>
 			</tr>

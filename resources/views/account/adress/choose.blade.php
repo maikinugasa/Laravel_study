@@ -31,11 +31,13 @@
 				<td>
 					<input type="radio" name="adress" value="{{ $adress->id }}">
 				</td>
-				<td>{{ $adress->id }}</td>
 				<td>{{ $adress->name }}</td>
 				<td>〒{{ $adress->postalcode }}</td>
 				<td>{{ $adress->prefecture }}{{ $adress->city }}{{ $adress->adress }}</td>
 				<td>{{ $adress->phonenumber }}</td>
+				<td>
+					<a href="{{ route('adress.edit', ['id' => $adress->id]) }}">編集</a>
+				</td>
 			</tr>
 		@endforeach
 	</tbody>

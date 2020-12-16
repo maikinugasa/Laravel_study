@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('adress/index', 'Account\AdressController@index')->name('adress.index'); //登録住所一覧表示
 	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //登録住所削除処理
 	Route::get('adress/create', 'Account\AdressController@create')->name('adress.create'); //新規住所登録ページ
+	Route::get('adress/edit/{id}', 'Account\AdressController@edit')->name('adress.edit'); //住所編集ページ
+	Route::post('adress/update/{id}', 'Account\AdressController@update')->name('adress.update'); //住所編集の更新処理
 	Route::post('adress/store', 'Account\AdressController@store')->name('adress.store'); //住所登録処理
 	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //商品削除処理
 	Route::get('adress/choose', 'Account\AdressController@choose')->name('adress.choose'); //住所選択ページ

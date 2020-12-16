@@ -18,18 +18,11 @@ class CartController extends Controller
 		$user_id = Auth::id();
 		$carts = Cart::where('user_id', $user_id)->get();
 		$cart_count = $carts->count();
-		$each_price = $this->eachprice($carts);
+		//$each_price = $this->eachprice($carts);
 		$subtotal = $this->subtotals($carts); //subtotalsの計算式呼び出し
-		//dd($each_price);
 		$tax = $subtotal * 0.1;
 		$total = $subtotal + $tax;
-		return view('cart.index', compact('each_price', 'carts', 'cart_count', 'subtotal', 'tax', 'total'));
-	}
-	public function eachprice($carts) {
-		foreach ($carts as $cart) {
-			$result = $cart->subtotal(); //Model内の計算式subtotalを呼び出し→全てを足し
-		}
-		return $result;
+		return view('cart.index', compact('carts', 'cart_count', 'subtotal', 'tax', 'total'));
 	}
 	//合計金額計算
 	public function subtotals($carts) {
@@ -108,12 +101,14 @@ class CartController extends Controller
 	//内容確認ページ
     public function confirm(Request $request)
     {
-		//$user_id = Auth::id();
-		//$adresses = Adress::where('user_id', $user_id)->get();
-		//$adress_count = $adresses->count();
-		//return view('cart.confirm', compact('adresses' ,'adress_count'));
-		$value = $request->input('adress');
-		dd($value);
-		return view('cart.confirm', compact('value'));
+		$user_id = Auth::id();
+		$carts = Cart::where('user_id', $user_id)->get();
+		//$each_price = $this->eachprice($carts);
+		$subtotal = $this->subtotals($carts); //subtotalsの計算式呼び出し
+		$tax = $subtotal * 0.1;
+		$total = $subtotal + $tax;
+		$adress_id = $request->input('adress');
+		$adress = Adress::where('id', $adress_id)->first();
+		return view('cart.confirm', compact('carts', 'total', 'adress'));
     }
 }

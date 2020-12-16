@@ -46,12 +46,15 @@ class AdressController extends Controller
 		//推移元によってリダイレクト先切り替え
 		$page = $request->input('page');
 		if ($page == 'from_cart') {
-			return redirect()->route('adress.choose');
+			return redirect()->route('adress.choose')->with([
+				'flash_message' => '住所の登録が完了しました',
+				'color' => 'success'
+			]);
 		} elseif ($page == 'from_account') {
 			return redirect()->route('adress.index')->with([
 				'flash_message' => '住所の登録が完了しました',
 				'color' => 'success'
-		]);
+			]);
 		}
     }
 
@@ -61,19 +64,46 @@ class AdressController extends Controller
 		$user_id = Auth::id();
 		$adresses = Adress::where('user_id', $user_id)->get();
 		$adress_count = $adresses->count();
-		return view('account.adress.choose', compact('adresses' ,'adress_count'));
+		return view('account.adress.choose', compact('adresses', 'adress_count'));
     }
 
 	//住所編集ページ
     public function edit($id)
     {
-        //
+		$url = url()->previous();
+		if ($url == 'https://procir-study.site/kinugasa351/exercise27/laravel_study/public/adress/choose') {
+			$page = 'from_cart';
+		} else {
+			$page = 'from_account';
+		}
+		$adress = Adress::find($id); //idで情報取得
+		return view('account.adress.edit', compact('page', 'adress'));
     }
 
 	//住所編集処理
     public function update(Request $request, $id)
     {
-        //
+		$adress = Adress::find($id);
+		$adress->name = $request->input('name');
+		$adress->postalcode = $request->input('postalcode');
+		$adress->prefecture = $request->input('prefecture');
+		$adress->city = $request->input('city');
+		$adress->adress = $request->input('adress');
+		$adress->phonenumber = $request->input('phonenumber');
+		$adress->save();
+		//推移元によってリダイレクト先切り替え
+		$page = $request->input('page');
+		if ($page == 'from_cart') {
+			return redirect()->route('adress.choose')->with([
+				'flash_message' => '住所の変更が完了しました',
+				'color' => 'success'
+			]);
+		} elseif ($page == 'from_account') {
+			return redirect()->route('adress.index')->with([
+				'flash_message' => '住所の変更が完了しました',
+				'color' => 'success'
+			]);
+		}
     }
 
 	//住所削除処理

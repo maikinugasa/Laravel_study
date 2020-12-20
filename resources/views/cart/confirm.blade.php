@@ -50,7 +50,7 @@
 	</table>
 </div>
 <div style="text-align:center;">
-	<p><a href="" class="btn btn-primary btn-sm" style="font-size:18px;">決済へ進む(仮)</a></p>
+	<p><a href="null" class="btn btn-primary btn-sm" style="font-size:18px;">決済へ進む(仮)</a></p>
 	<p><a href="{{ route('adress.choose') }}">前のページへ戻る</a></p>
 </div>
 </div>

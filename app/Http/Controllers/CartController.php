@@ -101,14 +101,22 @@ class CartController extends Controller
 	//内容確認ページ
     public function confirm(Request $request)
     {
+		//選択した住所表示
+		$adress_id = $request->input('adress');
+		if (!$adress_id) {
+			return redirect()->route('adress.choose')->with([
+				'flash_message' => '住所を選択してください',
+				'color' => 'danger'
+			]);
+		}
+		$adress = Adress::where('id', $adress_id)->first();
+		//カート内容表示
 		$user_id = Auth::id();
 		$carts = Cart::where('user_id', $user_id)->get();
 		//$each_price = $this->eachprice($carts);
 		$subtotal = $this->subtotals($carts); //subtotalsの計算式呼び出し
 		$tax = $subtotal * 0.1;
 		$total = $subtotal + $tax;
-		$adress_id = $request->input('adress');
-		$adress = Adress::where('id', $adress_id)->first();
 		return view('cart.confirm', compact('carts', 'total', 'adress'));
     }
 }

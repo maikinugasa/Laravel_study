@@ -19,7 +19,8 @@
 							<!---郵便番号-->
 							<label for="postalcode" class="col-md-4 control-label">郵便番号</label>
 							<div class="col-md-6" style="margin-bottom:5px">
-								<input id="postalcode" type="text" class="form-control" name="postalcode" placeholder="000-0000" value="{{ old('postalcode', $adress->postalcode) }}" required autofocus>
+								<script src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
+								<input id="postalcode" type="text" class="form-control" name="postalcode" placeholder="000-0000" value="{{ old('postalcode', $adress->postalcode) }}" onKeyUp="AjaxZip3.zip2addr(this, '', 'prefecture', 'city', 'adress');" required autofocus>
 							</div>
 							<!---都道府県-->
 							<label for="prefecture" class="col-md-4 control-label">都道府県</label>

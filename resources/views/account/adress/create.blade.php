@@ -4,6 +4,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			@if (session('flash_message'))
+				<div class="alert alert-{{ session('color') }}">
+					{{ session('flash_message') }}
+				</div>
+			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">新規配送先追加</div>
 

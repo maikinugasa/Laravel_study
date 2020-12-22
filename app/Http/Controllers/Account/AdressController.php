@@ -35,17 +35,48 @@ class AdressController extends Controller
 	//住所登録処理
 	public function store(AdressRequest $request)
 	{
+		$user_id = Auth::id();
+		$name = $request->input('name');
+		$postalcode = $request->input('postalcode');
+		$prefecture = $request->input('prefecture');
+		$city = $request->input('city');
+		$others = $request->input('adress');
+		$phonenumber = $request->input('phonenumber');
+		$page = $request->input('page');
+		//既存で同じ住所がある場合はエラー
+		$data = Adress::where('user_id', $user_id)
+			->where('name', $name)
+			->where('postalcode', $postalcode)
+			->where('prefecture', $prefecture)
+			->where('city', $city)
+			->where('adress', $others)
+			->where('phonenumber', $phonenumber)
+			->first();
+		if ($data) {
+		//推移元によってリダイレクト先切り替え
+			if ($page == 'from_cart') {
+				return redirect()->route('adress.choose')->with([
+					'flash_message' => '既に登録されている宛先です',
+					'color' => 'danger'
+				]);
+			} elseif ($page == 'from_account') {
+				return redirect()->route('adress.index')->with([
+					'flash_message' => '既に登録されている宛先です',
+					'color' => 'danger'
+				]);
+			}
+		}
+		//データの保存
 		$adress = new Adress;
-		$adress->user_id = Auth::id();
-		$adress->name = $request->input('name');
-		$adress->postalcode = $request->input('postalcode');
-		$adress->prefecture = $request->input('prefecture');
-		$adress->city = $request->input('city');
-		$adress->adress = $request->input('adress');
-		$adress->phonenumber = $request->input('phonenumber');
+		$adress->user_id = $user_id;
+		$adress->name = $name;
+		$adress->postalcode = $postalcode;
+		$adress->prefecture = $prefecture;
+		$adress->city = $city;
+		$adress->adress = $others;
+		$adress->phonenumber = $phonenumber;
 		$adress->save();
 		//推移元によってリダイレクト先切り替え
-		$page = $request->input('page');
 		if ($page == 'from_cart') {
 			return redirect()->route('adress.choose')->with([
 				'flash_message' => '住所の登録が完了しました',
@@ -101,16 +132,51 @@ class AdressController extends Controller
 	//住所編集処理
 	public function update(AdressRequest $request, $id)
 	{
-		$adress = Adress::find($id);
-		$adress->name = $request->input('name');
-		$adress->postalcode = $request->input('postalcode');
-		$adress->prefecture = $request->input('prefecture');
-		$adress->city = $request->input('city');
-		$adress->adress = $request->input('adress');
-		$adress->phonenumber = $request->input('phonenumber');
+		$adress = Adress::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
+		$user_id = Auth::id();
+		//ユーザーが相違している場合はエラー
+		if ($adress->user_id != $user_id) {
+			return \App::abort(404);
+		}
+		$name = $request->input('name');
+		$postalcode = $request->input('postalcode');
+		$prefecture = $request->input('prefecture');
+		$city = $request->input('city');
+		$others = $request->input('adress');
+		$phonenumber = $request->input('phonenumber');
+		$page = $request->input('page');
+		//既存で同じ住所がある場合はエラー
+		$data = Adress::where('user_id', $user_id)
+			->where('name', $name)
+			->where('postalcode', $postalcode)
+			->where('prefecture', $prefecture)
+			->where('city', $city)
+			->where('adress', $others)
+			->where('phonenumber', $phonenumber)
+			->first();
+		if ($data) {
+		//推移元によってリダイレクト先切り替え
+			if ($page == 'from_cart') {
+				return redirect()->route('adress.choose')->with([
+					'flash_message' => '既に登録されている宛先です',
+					'color' => 'danger'
+				]);
+			} elseif ($page == 'from_account') {
+				return redirect()->route('adress.index')->with([
+					'flash_message' => '既に登録されている宛先です',
+					'color' => 'danger'
+				]);
+			}
+		}
+		//データ更新
+		$adress->name = $name;
+		$adress->postalcode = $postalcode;
+		$adress->prefecture = $prefecture;
+		$adress->city = $city;
+		$adress->adress = $others;
+		$adress->phonenumber = $phonenumber;
 		$adress->save();
 		//推移元によってリダイレクト先切り替え
-		$page = $request->input('page');
 		if ($page == 'from_cart') {
 			return redirect()->route('adress.choose')->with([
 				'flash_message' => '住所の変更が完了しました',
@@ -127,8 +193,10 @@ class AdressController extends Controller
 	//住所削除処理
 	public function destroy(Request $request, $id)
 	{
-		$adress = Adress::find($id);
-		if (!$adress) {
+		$adress = Adress::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
+		$user_id = Auth::id();
+		//ユーザーが相違している場合はエラー
+		if ($adress->user_id != $user_id) {
 			return \App::abort(404);
 		}
 		$adress->delete();

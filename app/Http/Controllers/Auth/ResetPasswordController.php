@@ -36,4 +36,10 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
 }

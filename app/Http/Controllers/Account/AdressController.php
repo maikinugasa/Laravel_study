@@ -155,17 +155,19 @@ class AdressController extends Controller
 			->where('phonenumber', $phonenumber)
 			->first();
 		if ($data) {
-		//推移元によってリダイレクト先切り替え
-			if ($page == 'from_cart') {
-				return redirect()->route('adress.choose')->with([
-					'flash_message' => '既に登録されている宛先です',
-					'color' => 'danger'
-				]);
-			} elseif ($page == 'from_account') {
-				return redirect()->route('adress.index')->with([
-					'flash_message' => '既に登録されている宛先です',
-					'color' => 'danger'
-				]);
+			if ($id != $data->id) { //同一ID以外の被りだけエラー
+			//推移元によってリダイレクト先切り替え
+				if ($page == 'from_cart') {
+					return redirect()->route('adress.choose')->with([
+						'flash_message' => '既に登録されている宛先です',
+						'color' => 'danger'
+					]);
+				} elseif ($page == 'from_account') {
+					return redirect()->route('adress.index')->with([
+						'flash_message' => '既に登録されている宛先です',
+						'color' => 'danger'
+					]);
+				}
 			}
 		}
 		//データ更新

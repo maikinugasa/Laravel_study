@@ -23,7 +23,7 @@
 						<div class="col-md-6" style="margin-bottom:5px">
 							<input id="pass2" type="password" class="form-control" name="new_pwd" value="{{ old('pass2') }}" required>
 						</div>
-						<label for="pass3" class="col-md-4 control-label">確認用パスワード</label>
+						<label for="pass3" class="col-md-4 control-label">新しいパスワード(確認用)</label>
 						<div class="col-md-6" style="margin-bottom:5px">
 							<input id="pass3" type="password" class="form-control" name="confirm_pwd" value="{{ old('pass3') }}" required>
 						</div>

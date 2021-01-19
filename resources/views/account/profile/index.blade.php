@@ -14,7 +14,7 @@
 	<table class="table">
 		@foreach($user as $info)
 		<tr>
-			<th scope="col" style="color:#888888;">氏名</th>
+			<th scope="col" style="color:#888888;">ユーザー名</th>
 			<td>{{ $info->name }}</td>
 				<td>
 					<a href="{{ route('name.edit') }}" class="btn btn-primary btn-sm">編集</a>

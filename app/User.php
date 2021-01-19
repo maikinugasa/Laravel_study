@@ -2,6 +2,7 @@
 
 namespace App;
 
+//use Illuminate\Database\Eloquent\Model; //追加
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\PasswordResetNotification;

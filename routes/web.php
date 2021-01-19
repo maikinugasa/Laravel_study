@@ -24,6 +24,7 @@ Route::get('item/detail/{id}', 'ItemController@detail')->name('item.detail');
 	User 認証不要のページ(ホーム)
 --------------------------------------*/
 Route::get('/', 'ItemController@index');
+Route::get('profile/email/confirm/{token}', 'Account\EmailResetController@confirm')->name('email.confirm'); //メールアドレス編集ページ
 /*------------------------------------
 	User 認証要のページ(ログアウト・カート機能・配送先住所)
 --------------------------------------*/
@@ -42,6 +43,13 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('adress/destroy/{id}', 'Account\AdressController@destroy')->name('adress.destroy'); //商品削除処理
 	Route::get('adress/choose', 'Account\AdressController@choose')->name('adress.choose'); //住所選択ページ
 	Route::post('cart/confirm', 'CartController@confirm')->name('cart.confirm'); //内容確認ページ
+	Route::get('profile/index', 'Account\ProfileController@index')->name('profile.index'); //ユーザー情報表示画面
+	Route::get('profile/name/edit', 'Account\NameController@edit')->name('name.edit'); //ユーザー名編集ページ
+	Route::post('profile/name/update', 'Account\NameController@update')->name('name.update'); //ユーザー名の変更処理
+	Route::get('profile/email/edit', 'Account\EmailResetController@edit')->name('email.edit'); //メールアドレス編集ページ
+	Route::post('profile/email/update', 'Account\EmailResetController@update')->name('email.update'); //メールアドレスの変更処理(送信完了メッセージ表示)
+	Route::get('security/password/edit', 'Account\PasswordController@edit')->name('password.edit'); //パスワード編集ページ
+	Route::post('security/password/update', 'Account\PasswordController@update')->name('password.update'); //パスワード変更処理
 });
 /*------------------------------------
 	Admin 認証不要のページ(管理者用ログイン)

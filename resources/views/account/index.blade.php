@@ -4,6 +4,11 @@
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
+@if (session('flash_message'))
+	<div class="alert alert-{{ session('color') }}">
+		{{ session('flash_message') }}
+	</div>
+@endif
 	<h2> 会員情報</h2>
 	<div class="panel panel-default">
 	<table class="table">
@@ -15,7 +20,7 @@
 			<td>
 				<ul>
 					<li><a href="{{ route('adress.index') }}"> 登録住所設定</a></li>
-					<li>ユーザー名変更(仮)</li>
+					<li><a href="{{ route('profile.index') }}"> プロフィール情報変更</li>
 				</ul>
 			</td>
 		<tr>
@@ -29,7 +34,7 @@
 		<tr>
 			<td>
 				<ul>
-					<li>パスワード設定(仮)</li>
+					<li><a href="{{ route('password.edit') }}">パスワード変更</a></li>
 				</ul>
 			</td>
 		<tr>

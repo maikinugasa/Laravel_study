@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\EmailReset;
@@ -26,8 +27,17 @@ class EmailResetController extends Controller
     {
 		$user_id = Auth::id();
 		$new_email = $request->input('email');
+		$pwd = $request->input('password');
+		//パスワード相違の場合はエラー
+		$user = User::findOrFail($user_id); //該当するidのレコードが見つからない場合例外を投げる
+		if (Hash::check($pwd, $user->password) == false) {
+			return redirect()->route('email.edit')->with([
+				'flash_message' => 'パスワードに誤りがあります',
+				'color' => 'danger'
+			]);
+		}
+		//既に登録されているメールアドレスの場合はエラー
 		$resistered_email = User::where('email', $new_email)->where('id', $user_id)->first();
-		//既に登録されているメールアドレス の場合はエラー
 		if ($resistered_email) {
 			return redirect()->route('email.edit')->with([
 				'flash_message' => '既に登録済みのメールアドレスです',
@@ -63,7 +73,7 @@ class EmailResetController extends Controller
 		if ($email_data > 0) {
 			return \App::abort(404);
 		}
-		//(1)メールアドレス更新と(2)データ削除は同時処理
+		//(1)メールアドレス更新と(2)データ削除(3)セッション削除は同時処理
 		DB::beginTransaction();
 		try {
 			//(1)メールアドレスの更新
@@ -71,6 +81,8 @@ class EmailResetController extends Controller
 			$user->save();
 			//(2)email_resetsのデータ削除
 			EmailReset::where('token', $token)->delete();
+			//(3)セッション削除(メールのurlから再度ログインさせるため)
+			session()->flush();
 			//データ操作を確定させる
 			DB::commit();
 		} catch(Exception $exception) {
@@ -78,7 +90,9 @@ class EmailResetController extends Controller
 			DB::rollBack();
 			throw $exception;
 		}
-		$msg = 'メールアドレスの認証が完了しました。このページは閉じてください。';
-		return view('account.profile.email_confirm', compact('msg'));
+		return redirect('/login')->with([
+		'flash_message' => 'メールアドレスの認証が完了しました。再度ログインしてください。',
+			'color' => 'success'
+		]);
 	}
 }

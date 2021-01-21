@@ -73,4 +73,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::get('item/edit/{id}', 'Admin\ItemController@edit')->name('admin.edit'); //商品編集ページ
 	Route::post('item/update/{id}', 'Admin\ItemController@update')->name('admin.update'); //商品編集の更新処理
 	Route::post('item/destroy/{id}', 'Admin\ItemController@destroy')->name('admin.destroy'); //商品削除処理
+	Route::get('users', 'Admin\UserForAdminController@index')->name('admin.users'); //ユーザー一覧ページ
+	Route::get('users/detail/{id}', 'Admin\UserForAdminController@detail')->name('admin.users.detail'); //ユーザー詳細ページ
 });

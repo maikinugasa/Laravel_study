@@ -29,7 +29,7 @@
 					</button>
 
 					<!-- Branding Image -->
-					<a class="navbar-brand" href="{{ url('/admin/index') }}">Shop</a>
+					<a class="navbar-brand" href="{{ url('/admin/index') }}">あつまるな！人間の街withコロナ</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">

@@ -19,7 +19,7 @@
 	<tr>
 		<th scope="col">商品名</th>
 		<th scope="col">値段</th>
-		<th scope="col" colspan="3">在庫状況</th>
+		<th scope="col" colspan="4">在庫状況</th>
 	</tr>
 </thead>
 <tbody>
@@ -34,6 +34,11 @@
 		@else
 			<td>○在庫あり</td>
 		@endempty
+		<td>
+		@if(!empty($item->pic))
+			<img src="{{ asset('/storage/item_pics/' . $item->pic) }}" alt="アイテム画像" height="45">
+		@endif
+		</td>
 		<td>
 			<a href="{{ route('admin.edit', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">編集</a>
 		</td>

@@ -4,6 +4,11 @@
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
+@if(!empty($path))
+	<p style="text-align:center;">
+	<img src="{{ asset('/storage/item_pics/' . $path) }}" alt="アイテム画像" height="150">
+	</p>
+@endif
 <div class="panel panel-default">
 @if ($errors->any())
 	<div class="alert alert-danger">
@@ -58,6 +63,7 @@
 </tbody>
 </table>
 </div>
+<a href="javascript:history.back()">前のページへ戻る</a>
 </div>
 </div>
 </div>

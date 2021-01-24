@@ -17,7 +17,7 @@
 	<tr>
 		<th scope="col">商品名</th>
 		<th scope="col">値段</th>
-		<th scope="col">在庫状況</th>
+		<th scope="col" colspan="2">在庫状況</th>
 	</tr>
 </thead>
 <tbody>
@@ -30,6 +30,11 @@
 			@else
 				<td>○在庫あり</td>
 			@endempty
+			<td>
+			@if(!empty($item->pic))
+					<img src="{{ asset('/storage/item_pics/' . $item->pic) }}" alt="アイテム画像" height="45">
+			@endif
+			</td>
 		</tr>
 	@endforeach
 </tbody>

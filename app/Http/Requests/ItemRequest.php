@@ -45,6 +45,11 @@ class ItemRequest extends FormRequest
 				'integer', //整数かどうか
 				'min:0', //0以上
 				'max:10000000' //10000000以内
+			],
+			'pic' => [
+				'file',
+			//	//'image',
+				'mimes:jpeg,png,jpg,gif'
 			]
         ];
     }
@@ -66,6 +71,10 @@ class ItemRequest extends FormRequest
 			'stock.integer' => '在庫数：整数で指定してください',
 			'stock.min' => '金額：不正な数字です',
 			'stock.max' => '金額：不正な数字です',
+			//画像
+			'file' => '不正なアップロードです',
+			//'image' => '不正なアップロードです',,
+			'mimes' => '画像の形式に誤りがあります',
 		];
 	}
 }

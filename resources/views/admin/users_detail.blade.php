@@ -32,7 +32,7 @@
 
 <h4>【お届け先住所】</h4>
 	<div class="panel panel-default">
-@if($adress_count > 0)
+@if($address_count > 0)
 	<table class="table">
 	<thead>
 		<tr>
@@ -45,14 +45,14 @@
 	</thead>
 	<tbody>
 		<?php $i = 0; ?>
-		@foreach($adresses as $adress)
+		@foreach($addresses as $address)
 		<?php $i++; ?>
 			<tr>
 				<td><?php echo $i; ?></td>
-				<td>{{ $adress->name }}</td>
-				<td>〒{{ $adress->postalcode }}</td>
-				<td>{{ $adress->prefecture }}{{ $adress->city }}{{ $adress->adress }}</td>
-				<td>{{ $adress->phonenumber }}</td>
+				<td>{{ $address->name }}</td>
+				<td>〒{{ $address->postalcode }}</td>
+				<td>{{ $address->prefecture }}{{ $address->city }}{{ $address->address }}</td>
+				<td>{{ $address->phonenumber }}</td>
 			</tr>
 		@endforeach
 	</tbody>

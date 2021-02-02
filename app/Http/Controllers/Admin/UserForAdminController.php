@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Adress;
+use App\Address;
 
 class UserForAdminController extends Controller
 {
@@ -18,9 +18,9 @@ class UserForAdminController extends Controller
 	public function detail($id)
 	{
 		$user = User::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
-		$adresses = Adress::where('user_id', $id)->get();
-		$adress_count = $adresses->count();
-		return view('admin.users_detail', compact('user', 'adresses', 'adress_count')); //viewに渡す
+		$addresses = Address::where('user_id', $id)->get();
+		$address_count = $addresses->count();
+		return view('admin.users_detail', compact('user', 'addresses', 'address_count')); //viewに渡す
 	}
 
 	/**

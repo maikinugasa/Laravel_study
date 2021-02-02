@@ -80,7 +80,7 @@ class ItemController extends Controller
 	-------------------------------------------------------*/
 	public function edit($id)
 	{
-		$item = Item::find($id); //idで情報取得
+		$item = Item::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
 		if ($item->pic) {
 			$path = $item->pic;
 		}
@@ -92,7 +92,7 @@ class ItemController extends Controller
 	-------------------------------------------------------*/
 	public function update(ItemRequest $request, $id)
 	{
-		$item = Item::find($id);
+		$item = Item::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
 		$current_pic = $item->pic;
 		$item->product_name = $request->input('product_name');
 		$item->description = $request->input('description');
@@ -131,7 +131,7 @@ class ItemController extends Controller
 	-------------------------------------------------------*/
 	public function destroy(Request $request, $id)
 	{
-		$item = Item::find($id);
+		$item = Item::findOrFail($id); //該当するidのレコードが見つからない場合例外を投げる
 		$item->delete();
 		return redirect()->route('admin.index')->with([
 			'flash_message' => '商品を削除しました',

@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Adress extends Model
+class Address extends Model
 {
 	protected $fillable = [
-		'user_id', 'name', 'postalcode', 'prefecture', 'city', 'adress', 'phonenumber',
+		'user_id', 'name', 'postalcode', 'prefecture', 'city', 'address', 'phonenumber',
 	];
-	protected $table = 'adresses';
+	protected $table = 'addresses';
 
 	//倫理削除
 	use SoftDeletes;

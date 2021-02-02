@@ -37,21 +37,34 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>{{ $adress->name }}</td>
+			<td>{{ $address->name }}</td>
 			<td>
-				〒{{ $adress->postalcode }}<br>
-				{{ $adress->prefecture }}
-				{{ $adress->city }}
-				{{ $adress->adress }}
+				〒{{ $address->postalcode }}<br>
+				{{ $address->prefecture }}
+				{{ $address->city }}
+				{{ $address->address }}
 			</td>
-			<td>{{ $adress->phonenumber }}</td>
+			<td>{{ $address->phonenumber }}</td>
 		</tr>
 	</tbody>
 	</table>
 </div>
 <div style="text-align:center;">
+<form action="{{ route('charge') }}" method="POST">
+{{ csrf_field() }}
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+data-key="pk_test_51IE3apFoNyHqXHW2IQmpjUxaZr4oBpG7UTFDaXm9mAlp1CYI03q1MjrJKfQdnkEpXswqcDemNmVQV8Kn8cBwOLYc007ekaQcqX"
+data-amount="100"
+data-name="この商品の料金は100円です"
+data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+data-locale="auto"
+data-allow-remember-me="false"
+data-label="購入する"
+data-currency="jpy">
+</script>
+</form>
 	<p><a href="null" class="btn btn-primary btn-sm" style="font-size:18px;">決済へ進む(仮)</a></p>
-	<p><a href="{{ route('adress.choose') }}">前のページへ戻る</a></p>
+	<p><a href="{{ route('address.choose') }}">前のページへ戻る</a></p>
 </div>
 </div>
 </div>

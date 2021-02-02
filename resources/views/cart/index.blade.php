@@ -48,7 +48,7 @@
 	<p style="font-weight:bold; font-size:18px;">合計金額：¥{{ $total }}(税込)</p>
 	</div>
 	<p style="text-align:center;">
-		<a href="{{ route('adress.choose') }}" class="btn btn-primary btn-sm" style="font-size:18px;">次へ進む（お届け先選択)</a>
+		<a href="{{ route('address.choose') }}" class="btn btn-primary btn-sm" style="font-size:18px;">次へ進む（お届け先選択)</a>
 	</p>
 @else
 	<p style="text-align:center;">カートは空です</p>

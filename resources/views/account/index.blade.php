@@ -19,7 +19,7 @@
 		<tr>
 			<td>
 				<ul>
-					<li><a href="{{ route('adress.index') }}"> 登録住所設定</a></li>
+					<li><a href="{{ route('address.index') }}"> 登録住所設定</a></li>
 					<li><a href="{{ route('profile.index') }}"> プロフィール情報変更</li>
 				</ul>
 			</td>

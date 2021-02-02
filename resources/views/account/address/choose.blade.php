@@ -9,9 +9,9 @@
 		{{ session('flash_message') }}
 	</div>
 @endif
-@if($adress_count > 0)
+@if($address_count > 0)
 	<h2>お届け先住所選択</h2>
-	<p><a href="{{ route('adress.create') }}">新規配送先追加</a></p>
+	<p><a href="{{ route('address.create') }}">新規配送先追加</a></p>
 	<form action="{{ route('cart.confirm') }}" method="POST">
 	{{ csrf_field() }}
 	<div class="panel panel-default">
@@ -26,17 +26,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($adresses as $adress)
+		@foreach($addresses as $address)
 			<tr>
 				<td>
-					<input type="radio" name="adress" value="{{ $adress->id }}">
+					<input type="radio" name="address" value="{{ $address->id }}">
 				</td>
-				<td>{{ $adress->name }}</td>
-				<td>〒{{ $adress->postalcode }}</td>
-				<td>{{ $adress->prefecture }}{{ $adress->city }}{{ $adress->adress }}</td>
-				<td>{{ $adress->phonenumber }}</td>
+				<td>{{ $address->name }}</td>
+				<td>〒{{ $address->postalcode }}</td>
+				<td>{{ $address->prefecture }}{{ $address->city }}{{ $address->address }}</td>
+				<td>{{ $address->phonenumber }}</td>
 				<td>
-					<a href="{{ route('adress.edit', ['id' => $adress->id]) }}">編集</a>
+					<a href="{{ route('address.edit', ['id' => $address->id]) }}">編集</a>
 				</td>
 			</tr>
 		@endforeach
@@ -52,7 +52,7 @@
 @else
 	<div style="text-align:center;">
 	<p>住所は未登録です<br>下記ボタンよりご登録ください</p>
-	<p><a href="{{ route('adress.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
+	<p><a href="{{ route('address.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
 	</div>
 @endif
 </div>

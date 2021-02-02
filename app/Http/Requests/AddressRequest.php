@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdressRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -43,7 +43,7 @@ class AdressRequest extends FormRequest
 				'string', //文字列かどうか
 				'max:30' //30以内
 			],
-			'adress' => [
+			'address' => [
 				'required', //入力必須
 				'string', //文字列かどうか
 				'max:50' //50以内
@@ -75,9 +75,9 @@ class AdressRequest extends FormRequest
 			'city.string' => '市区町村：使用できない文字が含まれています',
 			'city.max' => '市区町村：30文字以内で入力してください',
 			//番地
-			'adress.required' => '番地：入力必須です',
-			'adress.string' => '番地：使用できない文字が含まれています',
-			'adress.max' => '番地：50文字以内で入力してください',
+			'address.required' => '番地：入力必須です',
+			'address.string' => '番地：使用できない文字が含まれています',
+			'address.max' => '番地：50文字以内で入力してください',
 			//電話番号
 			'phonenumber.required' => '電話番号：入力必須です',
 			'phonenumber.regex' => '電話番号：形式に誤りがあります',

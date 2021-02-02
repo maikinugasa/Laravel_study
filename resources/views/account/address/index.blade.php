@@ -9,9 +9,9 @@
 		{{ session('flash_message') }}
 	</div>
 @endif
-@if($adress_count > 0)
+@if($address_count > 0)
 	<h2>登録住所</h2>
-	<p><a href="{{ route('adress.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
+	<p><a href="{{ route('address.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
 	<div class="panel panel-default">
 	<table class="table">
 	<thead>
@@ -25,19 +25,19 @@
 	</thead>
 	<tbody>
 		<?php $i = 0; ?>
-		@foreach($adresses as $adress)
+		@foreach($addresses as $address)
 		<?php $i++; ?>
 			<tr>
 				<td><?php echo $i; ?></td>
-				<td>{{ $adress->name }}</td>
-				<td>〒{{ $adress->postalcode }}</td>
-				<td>{{ $adress->prefecture }}{{ $adress->city }}{{ $adress->adress }}</td>
-				<td>{{ $adress->phonenumber }}</td>
+				<td>{{ $address->name }}</td>
+				<td>〒{{ $address->postalcode }}</td>
+				<td>{{ $address->prefecture }}{{ $address->city }}{{ $address->address }}</td>
+				<td>{{ $address->phonenumber }}</td>
 				<td>
-					<a href="{{ route('adress.edit', ['id' => $adress->id]) }}" class="btn btn-primary btn-sm">編集</a>
+					<a href="{{ route('address.edit', ['id' => $address->id]) }}" class="btn btn-primary btn-sm">編集</a>
 				</td>
 				<td>
-					<form action="{{ route('adress.destroy', ['id' => $adress->id]) }}" method="POST">
+					<form action="{{ route('address.destroy', ['id' => $address->id]) }}" method="POST">
 						{{ csrf_field() }}
 						<input type="submit" class="btn btn-danger btn-sm btn-dell" value="削除">
 					</form>
@@ -49,7 +49,7 @@
 	</div>
 @else
 	<p style="text-align:center;">住所は未登録です<br>下記ボタンよりご登録ください</p>
-	<p style="text-align:center;"><a href="{{ route('adress.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
+	<p style="text-align:center;"><a href="{{ route('address.create') }}" class="btn btn-primary btn-sm">新規配送先追加</a></p>
 @endif
 </div>
 </div>

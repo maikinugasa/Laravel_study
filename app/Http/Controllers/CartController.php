@@ -8,7 +8,7 @@ use Illuminate\Support\facades\Auth;
 use App\Http\Requests\CartRequest; //バリデーション
 use App\Cart;
 use App\Item;
-use App\Adress;
+use App\Address;
 
 class CartController extends Controller
 {
@@ -102,21 +102,20 @@ class CartController extends Controller
     public function confirm(Request $request)
     {
 		//選択した住所表示
-		$adress_id = $request->input('adress');
-		if (!$adress_id) {
-			return redirect()->route('adress.choose')->with([
+		$address_id = $request->input('address');
+		if (!$address_id) {
+			return redirect()->route('address.choose')->with([
 				'flash_message' => '住所を選択してください',
 				'color' => 'danger'
 			]);
 		}
-		$adress = Adress::where('id', $adress_id)->first();
+		$address = Address::where('id', $address_id)->first();
 		//カート内容表示
 		$user_id = Auth::id();
 		$carts = Cart::where('user_id', $user_id)->get();
-		//$each_price = $this->eachprice($carts);
 		$subtotal = $this->subtotals($carts); //subtotalsの計算式呼び出し
 		$tax = $subtotal * 0.1;
 		$total = $subtotal + $tax;
-		return view('cart.confirm', compact('carts', 'total', 'adress'));
+		return view('cart.confirm', compact('carts', 'total', 'address'));
     }
 }

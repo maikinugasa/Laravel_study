@@ -25,6 +25,7 @@ class CreatePurchasesTable extends Migration
 			$table->integer('total_price'); //購入合計金額
 			$table->string('status'); //決済完了、発送完了、配送済み等をステータスで把握
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

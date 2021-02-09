@@ -12,6 +12,8 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}"></script>
 	<style>body{background-color:#FAF0E6;}</style>
 </head>
 <body>
@@ -78,7 +80,5 @@
 		@yield('content')
 	</div>
 
-	<!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

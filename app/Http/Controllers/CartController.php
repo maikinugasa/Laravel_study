@@ -116,6 +116,6 @@ class CartController extends Controller
 		$subtotal = $this->subtotals($carts); //subtotalsの計算式呼び出し
 		$tax = $subtotal * 0.1;
 		$total = $subtotal + $tax;
-		return view('cart.confirm', compact('carts', 'total', 'address'));
+		return view('cart.confirm', compact('carts', 'total', 'address', 'address_id'));
     }
 }

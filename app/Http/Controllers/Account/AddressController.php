@@ -53,7 +53,7 @@ class AddressController extends Controller
 			->where('phonenumber', $phonenumber)
 			->first();
 		if ($data) {
-		//推移元によってリダイレクト先切り替え
+			//推移元によってリダイレクト先切り替え
 			if ($page == 'from_cart') {
 				return redirect()->route('address.choose')->with([
 					'flash_message' => '既に登録されている宛先です',
@@ -156,7 +156,7 @@ class AddressController extends Controller
 			->first();
 		if ($data) {
 			if ($id != $data->id) { //同一ID以外の被りだけエラー
-			//推移元によってリダイレクト先切り替え
+				//推移元によってリダイレクト先切り替え
 				if ($page == 'from_cart') {
 					return redirect()->route('address.choose')->with([
 						'flash_message' => '既に登録されている宛先です',

@@ -4,16 +4,12 @@
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-<div class="panel panel-default">
-@if ($errors->any())
-	<div class="alert alert-danger">
-	<ul>
-	@foreach ($errors->all() as $error)
-		<li>{{ $error }}</li>
-	@endforeach
-	</ul>
+@if (session('flash_message'))
+	<div class="alert alert-{{ session('color') }}">
+		{{ session('flash_message') }}
 	</div>
 @endif
+<div class="panel panel-default">
 	<h2>ご注文内容確認</h2>
 	<table class="table">
 	<thead>
@@ -61,21 +57,21 @@
 <div style="text-align:center;">
 <div class="content">
 <form action="{{ route('charge') }}" method="POST">
-{{ csrf_field() }}
-<input type="hidden" name="address_id" value="{{ $address_id }}">
-<script
-src="https://checkout.stripe.com/checkout.js"
-class="stripe-button"
-data-key="pk_test_51IE3apFoNyHqXHW2IQmpjUxaZr4oBpG7UTFDaXm9mAlp1CYI03q1MjrJKfQdnkEpXswqcDemNmVQV8Kn8cBwOLYc007ekaQcqX"
-data-amount="{{ $total }}"
-data-name="決済画面"
-data-description="カード情報を入力ください"
-data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-data-locale="auto"
-data-allow-remember-me="false"
-data-label="決済画面へ進む"
-data-currency="jpy">
-</script>
+	{{ csrf_field() }}
+	<input type="hidden" name="address_id" value="{{ $address_id }}">
+	<script
+	src="https://checkout.stripe.com/checkout.js"
+	class="stripe-button"
+	data-key="pk_test_51IE3apFoNyHqXHW2IQmpjUxaZr4oBpG7UTFDaXm9mAlp1CYI03q1MjrJKfQdnkEpXswqcDemNmVQV8Kn8cBwOLYc007ekaQcqX"
+	data-amount="{{ $total }}"
+	data-name="決済画面"
+	data-description="カード情報を入力ください"
+	data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+	data-locale="auto"
+	data-allow-remember-me="false"
+	data-label="決済画面へ進む"
+	data-currency="jpy">
+	</script>
 </form>
 </div>
 <br>

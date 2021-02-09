@@ -12,8 +12,6 @@
 @if($address_count > 0)
 	<h2>お届け先住所選択</h2>
 	<p><a href="{{ route('address.create') }}">新規配送先追加</a></p>
-	<form action="{{ route('cart.confirm') }}" method="POST">
-	{{ csrf_field() }}
 	<div class="panel panel-default">
 	<table class="table">
 	<thead>
@@ -27,6 +25,7 @@
 	</thead>
 	<tbody>
 		@foreach($addresses as $address)
+		<form action="{{ route('cart.confirm', $address->id) }}" method="GET">
 			<tr>
 				<td>
 					<input type="radio" name="address" value="{{ $address->id }}">

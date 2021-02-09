@@ -102,7 +102,7 @@ class CartController extends Controller
     public function confirm(Request $request)
     {
 		//選択した住所表示
-		$address_id = $request->input('address');
+		$address_id = filter_input(INPUT_GET, 'address');
 		if (!$address_id) {
 			return redirect()->route('address.choose')->with([
 				'flash_message' => '住所を選択してください',
@@ -110,6 +110,9 @@ class CartController extends Controller
 			]);
 		}
 		$address = Address::where('id', $address_id)->first();
+		if (!$address) {
+			return \App::abort(404);
+		}
 		//カート内容表示
 		$user_id = Auth::id();
 		$carts = Cart::where('user_id', $user_id)->get();

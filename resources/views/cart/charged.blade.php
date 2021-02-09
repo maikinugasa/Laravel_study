@@ -9,6 +9,9 @@
 決済が完了しました。
 </p>
 </div>
+<p style="text-align:center;">
+<a href="{{ action('ItemController@index') }}">トップページへ戻る</a>
+</p>
 </div>
 </div>
 </div>

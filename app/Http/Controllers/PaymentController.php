@@ -19,19 +19,6 @@ class PaymentController extends Controller
 {
 	public function charge(Request $request)
 	{
-		/*
-		$cart_id = $request->cart_id;
-		dd($cart_id);
-		$count = count($cart_id);
-		//dd($count);
-		for ($i=0; $i < $count; $i++) {
-			$cart = Cart::where('id', $cart_id[$i])->get();
-			//$result = $cart_id[$i];
-			//dd($i);
-			//dd($cart_id[$i]);
-			//dd($result);
-		}
-		 */
 		$user_id = Auth::id();
 		$carts = Cart::where('user_id', $user_id)->get();
 		$result = 0;
@@ -105,7 +92,7 @@ class PaymentController extends Controller
 					'charge' => $charge->id,
 				));
 			}
-			return redirect()->route('cart.confirm')->with([
+			return redirect()->back()->with([
 				'flash_message' => "決済に失敗しました。再度お試しください。",
 				'color' => 'danger'
 			]);
